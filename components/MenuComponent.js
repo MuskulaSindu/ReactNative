@@ -13,26 +13,29 @@ class Menu extends React.Component{
     static navigationOptions ={
         title : 'Menu'
     }
+    renderMenuItem = ({item, index}) => {
+        const {navigate}= this.props.navigation;
+        return (
+            <ListItem
+                key={index}
+                title={item.name}
+                subtitle={item.description}
+                hideChevron={true}
+                //onPress={() => this.props.navigation.navigate('Dishdetail', {dishId : item.id})}
 
+                onPress={() => navigate('Dishdetail', {dishId : item.id})}
+               //<Dishdetail dish={item} />
+                leftAvatar={{ source: require('../assets/images/logo.png') }} />
+        );
+    };
      
     render(){
-        const renderMenuItem = ({item, index}) => {
-            return (
-                <ListItem
-                    key={index}
-                    title={item.name}
-                    subtitle={item.description}
-                    hideChevron={true}
-                    onPress={() => navigate('Dishdetail', {dishId : item.id})}
-                   //<Dishdetail dish={item} />
-                    leftAvatar={{ source: require('../assets/images/logo.png') }} />
-            );
-        };
-        const {navigate}= this.props.navigation;
+        
+       // const {navigate}= this.props.navigation;
     return (
             <FlatList 
                 data={this.state.dishes}
-                renderItem={renderMenuItem}
+                renderItem={this.renderMenuItem}
                 keyExtractor={item => item.id.toString()}
                 />
     );

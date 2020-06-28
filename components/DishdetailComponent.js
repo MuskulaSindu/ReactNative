@@ -3,25 +3,7 @@ import { Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
 import {DISHES} from '../shared/dishes';
 
-function RenderDish(props) {
 
-    const dish = props.dish;
-    
-        if (dish != null) {
-            return(
-                <Card
-                featuredTitle={dish.name}
-                image={require('../assets/images/uthappizza.png')}>
-                    <Text style={{margin: 10}}>
-                        {dish.description}
-                    </Text>
-                </Card>
-            );
-        }
-        else {
-            return(<View></View>);
-        }
-}
 class Dishdetail extends React.Component {
 
     constructor(props) {
@@ -37,9 +19,23 @@ class Dishdetail extends React.Component {
 
     render() {
         const dishId = this.props.navigation.getParam('dishId',' ');
-        return(
-            <RenderDish dish={this.state.dishes[+dishId]} />
-        );
+        const dish=this.state.dishes[+dishId];
+          //  <RenderDish dish={this.state.dishes[+dishId]} />
+         // const dish=this.state.dishes.filter(dish => dish.id===[+dishId]);
+          if (dish != null) {
+            return(
+                <Card
+                featuredTitle={dish.name}
+                image={require('../assets/images/uthappizza.png')}>
+                    <Text style={{margin: 10}}>
+                        {dish.description}
+                    </Text>
+                </Card>
+            );
+        }
+        else {
+            return(<View></View>);
+        }
     }
 }
 
